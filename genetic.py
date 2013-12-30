@@ -7,7 +7,9 @@ Created on 27-12-2013
 from random import shuffle, randrange, sample, random
 from makespan import makespan
 
-def genetic(times, population_size, num_of_epochs):
+def genetic(times):
+    population_size = 100
+    num_of_epochs = 100
     job_count = len(times)
     population = [list(range(1, job_count + 1)) for _ in range(0, population_size)]
     for individual in population:

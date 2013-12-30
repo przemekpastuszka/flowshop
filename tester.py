@@ -8,12 +8,20 @@ from makespan import makespan
 from cds import cds
 from genetic import genetic
 from neh import neh
+from optimal import optimal
+from time import time
+        
+def test(f, testcase):
+    start = time()
+    result = makespan(f(testcase), testcase)
+    end = time()
+    return (result, end - start)
 
 for i in range(1,17):
     with open('testcases/bat' + str(i)) as f:
         testcase = eval(f.read())
         
-        print "Test case ", i
-        print "CDS result: ", makespan(cds(testcase), testcase)
-        #print "genetic result: ", makespan(genetic(testcase, 100, 100), testcase)
-        print "NEH result: ", makespan(neh(testcase), testcase)
+        a = test(cds, testcase)
+        b = test(neh, testcase)
+        c = test(genetic, testcase)
+        print ' '.join([str(x[0]) for x in [a, b, c]] + [str(x[1]) for x in [a, b, c]])
